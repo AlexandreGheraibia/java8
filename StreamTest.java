@@ -21,9 +21,7 @@ public class HelloWorld
    
     i=intList.stream().reduce((x,y)->x>=y?x:y).get();
     System.out.println(i);
-    
-    
-    
+	  
     Stream<Elem> s=intList.stream().map(Elem::new);
     List<Elem>elemList=s.collect(Collectors.toList());
     Elem e=elemList.stream().reduce(new Elem(),(x,y)->{
