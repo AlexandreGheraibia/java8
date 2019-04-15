@@ -1,0 +1,91 @@
+//*******************************************************************
+// Welcome to CompileJava!
+// If you experience any issues, please contact us ('More Info')  -->
+// Also, sorry that the "Paste" feature no longer works! GitHub broke
+// this (so we'll switch to a new provider): https://blog.github.com\
+// /2018-02-18-deprecation-notice-removing-anonymous-gist-creation/
+//*******************************************************************
+
+import java.lang.*; // headers MUST be above the first class
+import java.util.*;
+// one class needs to have a main() method
+interface I1{
+  default void defaultInterface(){
+  		System.out.println("tata");
+  
+  }
+  void affiche(String str);
+
+  
+}
+
+interface I2 extends I1 {
+  default void defaultInterface(){
+  		System.out.println("morris");
+  
+  }
+  
+}
+
+interface I3  {
+   default void defaultInterface(){
+  		System.out.println("germaine");
+  
+  }
+}
+
+class C1 implements I1,I2/*,I3*/{
+  public void affiche(String s){
+    	System.out.println("C1 "+s);
+  }
+
+}
+
+public class HelloWorld
+{
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {
+    /******************************************************************/
+    I1 i1=new I1(){
+     public void defaultInterface(){
+  		System.out.println("I1 "+"test");
+  	 }
+      public void affiche(String str){
+        System.out.println("I1 "+str);
+      }
+    };
+    i1.defaultInterface();
+    /******************************************************************/
+    
+    I1 i1a=s->System.out.println(s);
+    i1a.affiche("toto");
+  	
+    /******************************************************************/
+    
+    I1 i1b=new I2(){
+      	
+      public void affiche(String str){
+        System.out.println("I2 "+str);
+      }
+    };
+  
+    i1b.defaultInterface();
+  
+    /******************************************************************/
+    C1 c1=new C1();
+  	/*c1.defaultInterface();
+  	
+    C1 c2=new C1();
+    I1 ic2=(I1)c2;
+    ic2.affiche("test");
+    ic2.defaultInterface();*/
+    
+  }
+  
+}
+
+
+
+
+   
