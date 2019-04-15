@@ -27,38 +27,34 @@ public class HelloWorld
     	System.out.println(result2.getName());
 	  
 	String result3=new Three().getTwo().flatMap(Two::getOne).map(One::getName).orElse(Optional.of(new String("N/A"))).get();
+	  
+	System.out.println( new Three().getTwo().flatMap(Two::getOne).map(One::getName));
+   	System.out.println( new Three().getTwo().flatMap(Two::getOne));
+   	System.out.println( new Three().getTwo());
+    
   }
 }
 
 class One{
-  	
 	String name="kikoo";
-  	
   	public Optional<String>getName(){
   			return Optional.ofNullable(name);
-    }
+   	}
   	void setName(String name){
-  
   		this.name=name;
   	}
-
-
 }
 
 class Two{
   	One one=new One();
   	public Optional<One>getOne(){
-  			return Optional.of(one);
+  	return Optional.of(one);
     }
-
-
 }
 
 class Three{
 	Two two;
   	public Optional<Two>getTwo(){
-  			return Optional.ofNullable(two);
+  	return Optional.ofNullable(two);
     }
-
-
 }
