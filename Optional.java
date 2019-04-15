@@ -19,6 +19,12 @@ public class HelloWorld
 	  
 	One result2=new Three().getTwo().orElse(new Two()).getOne().get();
 	System.out.println(result2.getName().get());
+	  
+	result2.setName("kikoo2");
+    	System.out.println(result2.getName());
+	  
+	result2.setName(null);
+    	System.out.println(result2.getName());
   }
 }
 
