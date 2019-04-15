@@ -25,20 +25,28 @@ public class HelloWorld
 	  
 	result2.setName(null);
     	System.out.println(result2.getName());
+	  
+	String result3=new Three().getTwo().flatMap(Two::getOne).map(One::getName).orElse(Optional.of(new String("N/A"))).get();
   }
 }
 
 class One{
+  	
 	String name="kikoo";
+  	
   	public Optional<String>getName(){
   			return Optional.ofNullable(name);
     }
+  	void setName(String name){
+  
+  		this.name=name;
+  	}
 
 
 }
 
 class Two{
-	One one=new One();
+  	One one=new One();
   	public Optional<One>getOne(){
   			return Optional.of(one);
     }
