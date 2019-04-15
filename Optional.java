@@ -15,7 +15,10 @@ public class HelloWorld
   public static void main(String[] args)
   {
    	String result=new Three().getTwo().orElse(new Two()).getOne().get().getName().orElseThrow(()->new NumberFormatException());
-    System.out.println(result);
+    	System.out.println(result);
+	  
+	One result2=new Three().getTwo().orElse(new Two()).getOne().get();
+	System.out.println(result2.getName().get());
   }
 }
 
