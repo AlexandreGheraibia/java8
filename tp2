@@ -1,0 +1,39 @@
+//*******************************************************************
+// Welcome to CompileJava!
+// If you experience any issues, please contact us ('More Info')  -->
+// Also, sorry that the "Paste" feature no longer works! GitHub broke
+// this (so we'll switch to a new provider): https://blog.github.com\
+// /2018-02-18-deprecation-notice-removing-anonymous-gist-creation/
+//*******************************************************************
+
+import java.lang.*; // headers MUST be above the first class
+import java.util.List;
+import java.util.Arrays;
+
+import java.util.function.*;
+
+import java.util.stream.Collectors;
+
+// one class needs to have a main() method
+public class HelloWorld
+{
+  static  ToLongFunction<Integer> add(Integer i){
+    	ToLongFunction<Integer>f=(param)->param+i;
+  		return f;
+  		
+  }
+  // arguments are passed using the text field below this editor
+  public static void main(String[] args)
+  {		List<Integer> intList=Arrays.asList(23,2,55,65,45,4);
+    	ToLongFunction<Integer>f=add(3);
+   		
+   		System.out.println(f.applyAsLong(5));
+   
+   		ToLongFunction<Integer>f2=add(78);
+   
+   		
+   		System.out.println(intList.stream().map(e->f2.applyAsLong(e)).collect(Collectors.toList()));
+   			
+  }
+}
+
