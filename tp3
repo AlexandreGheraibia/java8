@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 public class Test {
   public static void main(String[] args) throws EmployeException {
       Entreprise e1 = new Entreprise("IBM");
-      e1.ajouter(new Employe("Dupond", 5000));
+      e1.ajouter(new Employe("Dupond", 1000));
       e1.ajouter(new Employe("Poiret", 6000));
       e1.ajouter(new Employe("Burot", 5700));
       e1.ajouter(new Employe("Pernaut", 4300));
@@ -17,7 +17,7 @@ public class Test {
       e1.forEach(e->l.add(e));
       // Tri par salaires croissants
       String s=l.stream().filter(e3->e3.getSalaire()>1500)
-       .sorted((elem1,elem2)->Double.compare(elem1.getSalaire(),elem2.getSalaire()))
+       .sorted(Comparator.comparingDouble(Employe::getSalaire))
        .map(Employe::toString)
        .collect(Collectors.joining(", "));
     	System.out.println(s);
