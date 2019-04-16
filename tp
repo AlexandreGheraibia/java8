@@ -1,0 +1,100 @@
+import java.util.*;
+import java.util.Comparator;
+
+public class Test {
+  public static void main(String[] args) throws EmployeException {
+      Entreprise e1 = new Entreprise("IBM");
+      e1.ajouter(new Employe("Dupond", 5000));
+      e1.ajouter(new Employe("Poiret", 6000));
+      e1.ajouter(new Employe("Burot", 5700));
+      e1.ajouter(new Employe("Pernaut", 4300));
+      System.out.println(e1);
+
+      // Remplit une liste avec les employés
+      List<Employe> l = new ArrayList<>();
+      e1.forEach(e->l.add(e));
+
+
+      // Tri par salaires croissants
+      Comparator<Employe> comparateur =(elem1,elem2)->Double.compare(elem1.getSalaire(),elem2.getSalaire());
+      Collections.sort(l, comparateur);
+
+      System.out.println("Employés de " + e1.getNom() 
+                 + " par ordre croissant des salaires");
+
+      l.forEach(elem->{System.out.println("\t"+elem.getNom() + "\tgagne\t"
+               + elem.getSalaire());});
+    
+	}
+
+}
+
+
+
+
+/**
+ * Une entreprise
+ */
+public class Entreprise implements Iterable<Employe> {
+  private String nom;
+  private ArrayList<Employe> employes;
+
+  public Entreprise(String nom) {
+    this.nom = nom;
+    employes = new ArrayList<Employe>();
+  }
+  
+  public String getNom() {
+    return nom;
+  }
+
+  public void ajouter(Employe emp) throws EmployeException {
+    if (employes.contains(emp)) {
+      throw new EmployeException("Employé déjà dans cette entreprise", emp);
+    }
+    employes.add(emp);
+  }
+
+  @Override
+  public Iterator<Employe> iterator() {
+    return employes.iterator();
+  }  
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder(nom);
+    employes.forEach(e->sb.append("\n\t" + e.getNom()));
+    
+    return sb.toString();
+  }
+}
+
+
+/**
+ * Un employé.
+ */
+public class Employe {
+  private String nom;
+  private double salaire;
+
+  protected Employe(String nom, double salaire) {
+    this.nom = nom;
+    this.salaire = salaire;
+  }
+
+  public String getNom() {
+    return nom;
+  }
+
+  public double getSalaire() {
+    return salaire;
+  }
+}
+
+//EmployeException :
+
+public class EmployeException extends Exception {
+  public EmployeException(String message,Employe emp) {
+    super(message+emp);
+  }
+}
