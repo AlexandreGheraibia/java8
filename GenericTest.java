@@ -9,6 +9,7 @@
 import java.lang.*; // headers MUST be above the first class
 import java.util.*;
 import java.util.stream.*;
+import java.util.function.*;
 // one class needs to have a main() method
 public class HelloWorld
 {
@@ -18,7 +19,6 @@ public class HelloWorld
     List<Integer> intList=Arrays.asList(1,2,30,50,35,12,12,8,13,14);
     Integer i=intList.stream().reduce((x,y)->x<y?x:y).get();
     System.out.println(i);
-   
     i=intList.stream().reduce((x,y)->x>=y?x:y).get();
     System.out.println(i);
     
@@ -26,18 +26,22 @@ public class HelloWorld
     
     Stream<Elem3> s=intList.stream().map(Elem3::new);
     List<Elem3>elemList=s.collect(Collectors.toList());
-    Elem3 e=elemList.stream().reduce(new Elem3(),(x,y)->{
+    elemList.stream().reduce(new Elem3(),(x,y)->{
                                        if(y.getValue()>10)
                                         x.add(y);
                                       
                                       return x;
                                     }
-                            );
-   e.getElemList().stream().map(Elem3::toValue).forEach(System.out::println);
+                  				).getElemList()
+      							 .stream()
+      							 .map(Elem3::toValue)
+      							 .forEach(System.out::println);
     
   }
  
 }
+
+
 class Elem3 extends Elem2<Integer>{
   Elem3(){
       	super();   	
@@ -45,12 +49,14 @@ class Elem3 extends Elem2<Integer>{
   Elem3(Integer value){
      super(value);
     }
+ 
 }
 
 
 class Elem2<T>{
 	private List<Elem2>elemList;
   	private T value;
+    
   	Elem2(){
       	System.out.println("appellée");
     	this.elemList=new ArrayList<>();     	
@@ -74,7 +80,9 @@ class Elem2<T>{
  	List<Elem2> getElemList(){
   	return elemList;
  	}
-    public static Object toValue(Elem2 e){
+     
+  
+    public static  <E extends Elem2<?>>  Object toValue(E e){
   	  return e.getValue();
   }
 }
