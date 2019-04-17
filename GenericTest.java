@@ -24,51 +24,29 @@ public class HelloWorld
     
     
     
-    Stream<Elem2<Integer>> s=intList.stream().map(Elem2<Integer>::new);
-    List<Elem2<Integer>>elemList=s.collect(Collectors.toList());
-    Elem2<Integer> e=elemList.stream().reduce(new Elem2<Integer>(),(x,y)->{
+    Stream<Elem3> s=intList.stream().map(Elem3::new);
+    List<Elem3>elemList=s.collect(Collectors.toList());
+    Elem3 e=elemList.stream().reduce(new Elem3(),(x,y)->{
                                        if(y.getValue()>10)
                                         x.add(y);
                                       
                                       return x;
                                     }
                             );
-   e.getElemList().stream().map(Elem2::toValue).forEach(System.out::println);
+   e.getElemList().stream().map(Elem3::toValue).forEach(System.out::println);
     
   }
  
 }
-
-class Elem{
-	private List<Elem>elemList;
-  	private int value;
-  	Elem(){
-      	System.out.println("appellée");
-    	this.elemList=new ArrayList<>();     	
+class Elem3 extends Elem2<Integer>{
+  Elem3(){
+      	super();   	
     }
-  
- 	Elem(int value){
-     this.value=value;
+  Elem3(Integer value){
+     super(value);
     }
-  
-  	void add(Elem elem){
-     	 elemList.add(elem);
-  	}
-  
-  	int getValue(){
-      return value;
-  	}
-  
-  	void setValue(int value){
-      value=value;
-  	}
- 	List<Elem> getElemList(){
-  	return elemList;
- 	}
-   static int toValue(Elem e){
-  	  return e.getValue();
-  }
 }
+
 
 class Elem2<T>{
 	private List<Elem2>elemList;
@@ -100,4 +78,3 @@ class Elem2<T>{
   	  return e.getValue();
   }
 }
-
