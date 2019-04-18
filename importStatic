@@ -14,8 +14,8 @@ public class HelloWorld
      List<Integer> intList=asList(12,25,17,20,19,8,3);
      intList.stream().map(p1-> intList.parallelStream().map(p2->{return p1+p2==20 ? Optional.of(asList(p1,p2)):Optional.empty();}))
                      .flatMap(stream -> stream.filter(Optional::isPresent))
-            		       .findAny()
-            		       .ifPresent(e->System.out.println(e.get()));
+                     .findAny()
+                     .ifPresent(e->System.out.println(e.get()));
           		     		
     	
   }
