@@ -12,7 +12,7 @@ public class HelloWorld
   public static void main(String[] args)
   {
      List<Integer> intList=asList(12,25,17,20,19,8,3);
-     intList.stream().map(p1-> intList.parallelStream().map(p2->{return p1+p2==20 ? Optional.of(asList(p1,p2)):Optional.empty();}))
+     intList.parallelStream().map(p1-> intList.parallelStream().map(p2->{return p1+p2==20 ? Optional.of(asList(p1,p2)):Optional.empty();}))
                      .flatMap(stream -> stream.filter(Optional::isPresent))
                      .limit(1)
                      .findAny()
